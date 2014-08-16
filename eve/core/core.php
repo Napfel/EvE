@@ -1,6 +1,6 @@
 <?php
 
-class Core {
+class EvE {
 
 	private static $eve = null;
 	public $eve_main;
@@ -66,7 +66,7 @@ class Core {
 	public static function initEvE() {
 		if(self::$eve == null) {
 			try {
-				self::$eve = new Core();
+				self::$eve = new EvE();
 				self::$eve->preEvE();
 			}
 			catch(EvEException $ex) {

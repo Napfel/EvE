@@ -12,9 +12,9 @@ include('/eve/core/autoload.php');
   @ini_set('session.use_only_cookies','1');
   @ini_set('display_errors','on');
 
-if(Core::checkPHPversion() == true) {
+if(EvE::checkPHPversion() == true) {
  @date_default_timezone_set('Europe/Berlin');
 
- Core::initEvE();
- Debug::this(Core::initEvE());
+ EvE::initEvE();
+ Debug::this(EvE::initEvE());
 }
