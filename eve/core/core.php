@@ -25,6 +25,28 @@ class Core {
 			$this->eve_main['def_lang'] = empty($this->eve_main['def_lang']) ? 'German' : $this->eve_main['def_lang'];
 			$this->eve_main['def_theme'] = 'eve';
 			$this->account = array('user_id' => 0, 'access_eve' => 0);
+
+			if(file_exists('eve/config.php')) {
+				require_once 'eve/config.php';
+			} 
+			else {
+				die('Keine Konfigurations Datei gefunden.');
+			}
+
+			if(!empty($this->eve_main['init_sql'])) {
+				$options['unicode'] = extension_loaded('unicode') ? 1 : 0;
+			}
+			 if(empty($this->eve_main['charset'])) {
+			 	$this->eve_main['charset'] = 'UTF-8';
+			 	die('Keine Charset Informationen in der config.php gefunden.');
+			 }
+
+			$options = array();
+			$this->eve_main = array_merge($this->eve_main, $options);
+
+			if(empty($this->eve_main['def_path'])) {
+				$this->eve_main['def_path'] = getcwd();
+			}
 	}
 
 	public static function checkPHPversion() {
