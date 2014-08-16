@@ -16,4 +16,5 @@ if(Core::checkPHPversion() == true) {
  @date_default_timezone_set('Europe/Berlin');
 
  Core::initEvE();
+ Debug::this(Core::initEvE());
 }

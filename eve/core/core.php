@@ -3,17 +3,24 @@
 class Core {
 
 	private static $eve = null;
-	public static $eve_main = array('init_sql' => true, 'init_tpl' => true, 'tpl_file' =>'index.html');
+	public $eve_main;
 	public $account;
 	public $com_lang;
 	public $eve_logs;
 	public $micro;
 	public $template;
 
-	public static function runEvE($pre) {
+	function loadEvE() {
 
-		$micro = explode(' ', microtime()); 
-		Debug::this($micro);
+		if($this->micro == null) {
+		$this->micro = explode(' ', microtime());	
+		}
+		 
+		$this->load();		
+	}
+
+	function load() {
+			$this->eve_main = array('init_sql' => true, 'init_tpl' => true, 'tpl_file' =>'index.html');
 	}
 
 	public static function checkPHPversion() {
@@ -34,7 +41,7 @@ class Core {
 		if(self::$eve == null) {
 			try {
 				self::$eve = new Core();
-				self::$eve->runEvE(self::$eve_main);
+				self::$eve->loadEvE();
 			}
 			catch(EvEException $ex) {
 				self::$eve = $ex->getErrorPage();
