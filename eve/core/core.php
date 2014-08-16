@@ -4,10 +4,16 @@ class Core {
 
 	private static $eve = null;
 	public static $eve_main = array('init_sql' => true, 'init_tpl' => true, 'tpl_file' =>'index.html');
+	public $account;
+	public $com_lang;
+	public $eve_logs;
+	public $micro;
+	public $template;
 
 	public static function runEvE($pre) {
 
-		Debug::this($pre);
+		$micro = explode(' ', microtime()); 
+		Debug::this($micro);
 	}
 
 	public static function checkPHPversion() {
