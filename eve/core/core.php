@@ -10,17 +10,21 @@ class Core {
 	public $micro;
 	public $template;
 
-	function loadEvE() {
+	function preEvE() {
 
+		$this->eve_main = array('init_sql' => true, 'init_tpl' => true, 'tpl_file' =>'index.html');
 		if($this->micro == null) {
 		$this->micro = explode(' ', microtime());	
 		}
 		 
-		$this->load();		
+		$this->loadEvE();		
 	}
 
-	function load() {
-			$this->eve_main = array('init_sql' => true, 'init_tpl' => true, 'tpl_file' =>'index.html');
+	function loadEvE() {
+			$this->eve_main['cellspacing'] = 1;
+			$this->eve_main['def_lang'] = empty($this->eve_main['def_lang']) ? 'German' : $this->eve_main['def_lang'];
+			$this->eve_main['def_theme'] = 'eve';
+			$this->account = array('user_id' => 0, 'access_eve' => 0);
 	}
 
 	public static function checkPHPversion() {
@@ -41,7 +45,7 @@ class Core {
 		if(self::$eve == null) {
 			try {
 				self::$eve = new Core();
-				self::$eve->loadEvE();
+				self::$eve->preEvE();
 			}
 			catch(EvEException $ex) {
 				self::$eve = $ex->getErrorPage();
